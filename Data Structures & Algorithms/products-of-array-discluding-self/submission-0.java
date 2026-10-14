@@ -1,14 +1,5 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
-        // Left-to-Right Pass
-        List<Integer> left = new ArrayList<>(); //[1, 1, 2, 8]
-
-        int runningProduct = 1;
-
-        for(int i = 0; i < nums.length; i++){
-            left.add(runningProduct);
-            runningProduct *= nums[i];
-        }
 
         // Right-to-Left Pass 
         List<Integer> right = new ArrayList<>(); 
@@ -21,10 +12,11 @@ class Solution {
         }
 
         // Final Output 
+        int left = 1;
         int[] result = new int[nums.length];  
         for(int i =0; i < nums.length; i++){
-            result[i] = left.get(i) * right.get(i); 
-            
+            result[i] = left * right.get(i); 
+            left *= nums[i];
         }
         return result;
     }
